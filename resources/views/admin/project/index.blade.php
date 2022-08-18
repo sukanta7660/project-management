@@ -7,7 +7,7 @@
             <div class="card-header">
                 <h3 class="card-title">Projects</h3>
                 <div class="card-tools">
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a href="{{ route('admin.projects.create') }}" class="btn btn-sm btn-info">
                         <i class="fas fa-plus"></i>
                         Add Project
                     </a>
