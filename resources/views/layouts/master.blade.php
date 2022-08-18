@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title') | Dashboard</title>
+    <title>@yield('title') || Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" >
@@ -26,6 +27,21 @@
     @include('layouts.partial.admin.sidebar')
 
     <div class="content-wrapper" style="min-height: 1203.6px; " >
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>@yield('title')</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active">@yield('title')</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
         @yield('content')
     </div>
 
@@ -54,6 +70,12 @@
 <script src="{{asset('asset')}}/dist/js/adminlte.js"></script>
 <script src="{{asset('asset')}}/dist/js/pages/dashboard.js"></script>
 <script src="{{asset('asset')}}/dist/js/demo.js"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
 @yield('script')
 </body>
 </html>

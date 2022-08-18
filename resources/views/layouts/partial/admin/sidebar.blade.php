@@ -9,14 +9,21 @@
   <!-- Sidebar -->
   <div class="sidebar" >
     <!-- Sidebar user panel (optional) -->
-
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+              <img src="{{ asset('asset/dist/img/avatar04.png') }}" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+              <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+          </div>
+      </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -25,68 +32,52 @@
           </li>
 
           <!---------------Admin Sidebar----------------------->
-        <li class="nav-item has-treeview">
+        <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
+            <i class="nav-icon fas fa-clipboard-check"></i>
             <p>
-              User
+              Tasks
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Admin</p>
+                <p>Add Task</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Students</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Teachers</p>
+                <p>All Tasks</p>
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-university"></i>
-            <p>
-              Department
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-clock"></i>
-            <p>
-              Exam type
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-poll-h"></i>
-            <p>
-              Exams
-            </p>
-          </a>
-        </li>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-poll-h"></i>
-            <p>
-              Question
-            </p>
-          </a>
-        </li>
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-project-diagram"></i>
+                  <p>
+                      Projects
+                      <i class="right fas fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add Project</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('admin.projects.index') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>All Project</p>
+                      </a>
+                  </li>
+              </ul>
+          </li>
 
         <li class="nav-item">
           <a href="{{ route('logout') }}"
