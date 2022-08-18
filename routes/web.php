@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::resource('projects', ProjectController::class);
 });
 
 Auth::routes();
