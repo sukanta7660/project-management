@@ -14,15 +14,17 @@ class ProjectFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition() :array
     {
-        $type = config('site.project.type');
-        $key = array_rand($type);
-
+        $status = ['pending','in-progress','completed'];
+        $key = array_rand($status);
         return [
-            'name' => $this->faker->company(),
-            'type' => $type[$key],
+            'name' => $this->faker->word(),
+            'status' => $this->faker->randomElement($status),
             'description' => $this->faker->sentence,
+            'start_date' => $this->faker->date('Y-m-d'),
+            'end_date' => $this->faker->date('Y-m-d'),
+            'manager_id' => rand(1, 5),
             'created_at' => now(),
             'updated_at' => now()
         ];
