@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('user_project', function (Blueprint $table) {
+        Schema::create('project_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')
                 ->constrained('projects')

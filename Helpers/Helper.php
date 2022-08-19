@@ -812,4 +812,9 @@ class Helper
 
         return $fullPath ? "$class::$method" : $method;
     }
+
+    public static function dateFormatAlt($date, $format = 'd.m.Y') :string
+    {
+        return date($format, strtotime($date));
+    }
 }
