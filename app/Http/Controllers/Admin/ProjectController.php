@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -10,7 +11,11 @@ class ProjectController extends Controller
 {
     public function index() :View
     {
-        return view('admin.project.index');
+        $projects = Project::with(['manager', 'team'])
+            ->orderByDesc('created_at')
+            ->get()
+        ;
+        return view('admin.project.index', compact('projects'));
     }
 
     public function create() :View
