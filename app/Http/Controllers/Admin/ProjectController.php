@@ -55,7 +55,7 @@ class ProjectController extends Controller
                 'status' => $request->status
             ]);
 
-            $project->team()->sync($request->team_members);
+            $project->team()->attach($request->team_members);
 
         }catch (Throwable $e) {
             $e->getMessage();
@@ -73,15 +73,53 @@ class ProjectController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Project $project) :View
     {
-        //
+        $managers = User::whereRole('manager')->get();
+        $staffs = User::whereRole('staff')->get();
+
+        return view('admin.project.edit',
+            compact('managers', 'project', 'staffs')
+        );
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project) :RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required | min:3',
+            'project_leader' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'team_members' => 'required'
+        ]);
+
+        $startDate = Helper::dateFormatAlt($request->start_date, 'Y-m-d');
+        $endDate = Helper::dateFormatAlt($request->end_date, 'Y-m-d');
+
+        try {
+
+            $project->team()->detach();
+
+            $project->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'manager_id' => $request->project_leader,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'status' => $request->status
+            ]);
+
+            $project->team()->attach($request->team_members);
+
+        }catch (Throwable $e) {
+            $e->getMessage();
+            Alert::error('OPPs!', 'Something Went Wrong');
+            return redirect()->back()->with('errorMessage', 'Something Went Wrong');
+        }
+        Alert::success('Success!', 'Successfully Updated');
+        return redirect()->route('admin.projects.index');
     }
 
 

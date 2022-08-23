@@ -107,7 +107,9 @@
                                         </i>
                                         View
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    <a
+                                        class="btn btn-info btn-sm"
+                                        href="{{ route('admin.projects.edit', $row->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit

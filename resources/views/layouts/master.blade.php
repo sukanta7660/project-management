@@ -79,7 +79,8 @@
 <script>
     $(document).ready( function () {
         $('#myTable').DataTable();
-        $('.select2').select2()
+        $('.select2').select2();
+        $("#showTeam").select2({disabled:'readonly'});
     } );
 </script>
 @yield('script')
