@@ -19,7 +19,7 @@ class ProjectFactory extends Factory
         $status = ['pending','in-progress','completed'];
         $key = array_rand($status);
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->unique()->word,
             'status' => $this->faker->randomElement($status),
             'description' => $this->faker->sentence,
             'start_date' => $this->faker->date('Y-m-d'),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -20,7 +21,9 @@ class ProjectController extends Controller
 
     public function create() :View
     {
-        return view('admin.project.create');
+        $managers = User::whereRole('manager')->get();
+        $staffs = User::whereRole('staff')->get();
+        return view('admin.project.create', compact('managers', 'staffs'));
     }
 
     public function store(Request $request)

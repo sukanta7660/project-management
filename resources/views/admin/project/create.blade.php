@@ -11,28 +11,53 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="inputName">Project Name</label>
-                            <input type="text" id="inputName" class="form-control">
+                            <input type="text" id="inputName" class="form-control" name="name">
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Project Description</label>
-                            <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                            <textarea id="inputDescription" class="form-control" rows="4" name="description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="inputStatus">Status</label>
                             <select id="inputStatus" class="form-control custom-select">
                                 <option selected="" disabled="">Select one</option>
-                                <option>On Hold</option>
-                                <option>Canceled</option>
-                                <option>Success</option>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">IN Progress</option>
+                                <option name="completed">Completed</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputClientCompany">Client Company</label>
-                            <input type="text" id="inputClientCompany" class="form-control">
+                            <label for="inputProjectLeader">Project Leader</label>
+                            <select name="manager_id" id="" class="form-control custom-select" required>
+                                <option selected="" disabled="">Select one</option>
+                                @foreach($managers as $key => $value)
+                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">Start Date</label>
+                                    <input type="date" name="start_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">End Date</label>
+                                    <input type="date" name="end_date" class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputProjectLeader">Project Leader</label>
-                            <input type="text" id="inputProjectLeader" class="form-control">
+                            <label>Add Team Members</label>
+                            <div class="select2-purple">
+                                <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                    @foreach($staffs as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 

@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/jqvmap/jqvmap.min.css">
     <link rel="stylesheet" href="{{asset('asset')}}/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{asset('asset')}}/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{asset('asset')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{asset('asset')}}/plugins/summernote/summernote-bs4.css">
@@ -63,6 +65,7 @@
 <script src="{{asset('asset')}}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <script src="{{asset('asset')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
 <script src="{{asset('asset')}}/plugins/moment/moment.min.js"></script>
+<script src="{{asset('asset')}}/plugins/select2/js/select2.full.min.js"></script>
 <script src="{{asset('asset')}}/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="{{asset('asset')}}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="{{asset('asset')}}/plugins/summernote/summernote-bs4.min.js"></script>
@@ -74,6 +77,7 @@
 <script>
     $(document).ready( function () {
         $('#myTable').DataTable();
+        $('.select2').select2()
     } );
 </script>
 @yield('script')

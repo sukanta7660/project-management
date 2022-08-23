@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('image')->default('default.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'staff', 'manager'])->default('staff');
             $table->rememberToken();
             $table->timestamps();
         });
