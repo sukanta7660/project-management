@@ -67,9 +67,9 @@ class ProjectController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Project $project) :View
     {
-        //
+        return view('admin.project.details', compact('project'));
     }
 
 
