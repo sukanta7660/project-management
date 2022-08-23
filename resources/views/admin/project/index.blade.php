@@ -59,10 +59,11 @@
                                 </td>
                                 <td>
                                     <ul class="list-inline">
-                                        @if($row->teams != null)
-                                            @foreach($row->teams as $team)
-                                                <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="{{ asset('asset') }}/dist/img/avatar.png">
+                                        @if(count($row->team) > 0)
+                                            @foreach($row->team as $team)
+                                                <li class="list-inline-item text-center">
+                                                    <img alt="Avatar" class="table-avatar" src="{{ asset('asset') }}/dist/img/avatar.png"><br>
+                                                    <small>{{ $team->name }}</small>
                                                 </li>
                                             @endforeach
                                         @else
