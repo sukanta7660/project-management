@@ -13,6 +13,8 @@ class Project extends Model
 
     protected $table = 'projects';
 
+    protected $guarded = ['id'];
+
     public function manager() :BelongsTo
     {
         return $this->belongsTo(User::class);

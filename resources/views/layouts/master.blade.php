@@ -53,6 +53,8 @@
     </aside>
 </div>
 
+@include('sweetalert::alert')
+
 <script src="{{asset('asset')}}/plugins/jquery/jquery.min.js"></script>
 <script src="{{asset('asset')}}/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
