@@ -16,7 +16,11 @@
                                     <div class="card-header">
                                         <h3 class="card-title">Tasks</h3>
                                         <div class="card-tools">
-                                            <a href="#" class="btn btn-sm btn-info">
+                                            <a
+                                                data-toggle="modal"
+                                                data-target="#taskModal"
+                                                href="#"
+                                                class="btn btn-sm btn-info btn-flat">
                                                 <i class="fas fa-plus"></i>
                                                 Add Task
                                             </a>
@@ -35,17 +39,36 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            @forelse($project->tasks as $index => $row)
                                             <tr>
-                                                <td>1</td>
-                                                <td>example</td>
-                                                <td>example description</td>
-                                                <td></td>
+                                                <td>{{ $index+1 }}</td>
+                                                <td>{{ $row->task }}</td>
+                                                <td>{{ $row->description }}</td>
+                                                <td>{{ $row->staff->name }}</td>
                                                 <td class="project-state">
-                                                    <span class="badge badge-success">Success</span>
+                                                    <span class="badge badge-secondary">{{ $row->status }}</span>
                                                 </td>
                                                 <td class="project-actions text-right">
+                                                    <a
+                                                        class="btn btn-info btn-sm"
+                                                        href="#">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="#">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
+                                            @empty
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>No Data available</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -59,8 +82,8 @@
                                     <div class="user-block">
                                         <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
                                         <span class="username">
-<a href="#">Jonathan Burke Jr.</a>
-</span>
+                                            <a href="#">Jonathan Burke Jr.</a>
+                                        </span>
                                         <span class="description">Shared publicly - 7:45 PM today</span>
                                     </div>
 
@@ -77,8 +100,8 @@
                                     <div class="user-block">
                                         <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="User Image">
                                         <span class="username">
-<a href="#">Sarah Ross</a>
-</span>
+                                            <a href="#">Sarah Ross</a>
+                                        </span>
                                         <span class="description">Sent you a message - 3 days ago</span>
                                     </div>
 
@@ -95,8 +118,8 @@
                                     <div class="user-block">
                                         <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
                                         <span class="username">
- <a href="#">Jonathan Burke Jr.</a>
-</span>
+                                            <a href="#">Jonathan Burke Jr.</a>
+                                        </span>
                                         <span class="description">Shared publicly - 5 days ago</span>
                                     </div>
 
@@ -168,6 +191,8 @@
                     </div>
                 </div>
             </div>
+
+            @include('admin.project.task-model')
 
         </div>
 

@@ -17,7 +17,10 @@
                             </div>
                         @endif
                     </div>
-                    <form action="{{ route('admin.projects.store') }}" method="post" enctype="multipart/form-data">
+                    <form
+                        action="{{ route('admin.projects.store') }}"
+                        method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
