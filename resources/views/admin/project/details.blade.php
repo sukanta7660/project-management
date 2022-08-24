@@ -77,6 +77,66 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <div class="card card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Discuss Here</h3>
+                                    </div>
+                                    <form
+                                        action="#"
+                                        method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="inputTask">Task</label>
+                                                        <select
+                                                            name="task" id="inputTask"
+                                                            class="form-control custom-select" required>
+                                                            <option selected="" disabled="">Select one</option>
+                                                            @foreach($project->tasks as $key => $value)
+                                                                <option value="{{ $value->id }}">{{ $value->task }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="inputSubject">Subject</label>
+                                                        <input
+                                                            type="text"
+                                                            id="inputSubject"
+                                                            class="form-control"
+                                                            placeholder="subject"
+                                                            name="subject"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputComment">Comment</label>
+                                                <textarea
+                                                    id="inputComment"
+                                                    class="form-control"
+                                                    rows="2"
+                                                    cols="4"
+                                                    name="comment"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-info btn-sm btn-flat float-right">Create new Project</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
                                 <h4>Recent Activity</h4>
                                 <div class="post">
                                     <div class="user-block">
