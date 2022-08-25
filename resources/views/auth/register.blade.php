@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{asset('asset')}}/dist/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition register-page" style="background-color: rgb(46, 139, 123)">
+<body class="hold-transition register-page" style="background-color: rgb(191,206,212)">
 <div class="register-box">
     <div class="login-logo">
         <p><b>Project</b>Management</p>
