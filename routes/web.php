@@ -23,7 +23,14 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('projects', ProjectController::class);
-    Route::post('projects/task-store', [ProjectController::class, 'taskStore'])->name('projects.task.store');
+
+    Route::controller(ProjectController::class)->group(function () {
+
+        Route::post('projects/task-store', 'taskStore')->name('projects.task.store');
+        Route::post('projects/discussion-store', 'discussionStore')->name('projects.discussion.store');
+
+    });
+
 });
 
 Auth::routes();

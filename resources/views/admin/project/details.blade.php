@@ -2,7 +2,16 @@
 @section('title', 'Project Details')
 @section('content')
     <section class="content">
-
+        @if(session()->has('warning'))
+            <div class="alert alert-warning">
+                {{ session()->get('warning') }}
+            </div>
+        @endif
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Project Detail</h3>
@@ -82,9 +91,10 @@
                                         <h3 class="card-title">Discuss Here</h3>
                                     </div>
                                     <form
-                                        action="#"
+                                        action="{{ route('admin.projects.discussion.store') }}"
                                         method="post"
                                         enctype="multipart/form-data">
+                                        <input type="hidden" value="{{ $project->id }}" name="id">
                                         @csrf
                                         <div class="card-body">
                                             <div class="row">
@@ -121,6 +131,7 @@
                                                     class="form-control"
                                                     rows="2"
                                                     cols="4"
+                                                    required
                                                     name="comment"></textarea>
                                             </div>
                                         </div>
@@ -128,7 +139,7 @@
                                         <div class="card-footer">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn btn-info btn-sm btn-flat float-right">Create new Project</button>
+                                                    <button type="submit" class="btn btn-info btn-sm btn-flat float-right">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,60 +149,23 @@
                             </div>
                             <div class="col-12">
                                 <h4>Recent Activity</h4>
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
-                                        <span class="username">
-                                            <a href="#">Jonathan Burke Jr.</a>
+                                @forelse($project->discussion as $key => $discussion)
+                                    <div class="post {{ ($key+1)%2 == 0 ? 'clearfix' : '' }}">
+                                        <div class="user-block">
+                                            <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
+                                            <span class="username">
+                                            <a href="#">{{ $discussion->user->name }}</a>
                                         </span>
-                                        <span class="description">Shared publicly - 7:45 PM today</span>
-                                    </div>
+                                            <span class="description">{{ $discussion->subject }} - {{ Helper::dateFormatAlt($discussion->created_at) }}</span>
+                                        </div>
 
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                                    </p>
-                                </div>
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="User Image">
-                                        <span class="username">
-                                            <a href="#">Sarah Ross</a>
-                                        </span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
+                                        <p>
+                                            {{ $discussion->comment }}
+                                        </p>
                                     </div>
-
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-                                    </p>
-                                </div>
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
-                                        <span class="username">
-                                            <a href="#">Jonathan Burke Jr.</a>
-                                        </span>
-                                        <span class="description">Shared publicly - 5 days ago</span>
-                                    </div>
-
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                                    </p>
-                                </div>
+                                @empty
+                                    <h5>No discussion here</h5>
+                                @endforelse
                             </div>
                         </div>
                     </div>

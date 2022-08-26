@@ -30,4 +30,9 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function discussion() :HasMany
+    {
+        return $this->hasMany(UserProjectActivity::class);
+    }
 }

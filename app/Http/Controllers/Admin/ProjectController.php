@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserProjectActivity;
 use Helper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -153,5 +154,29 @@ class ProjectController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function discussionStore(Request $request) :RedirectResponse
+    {
+        $request->validate([
+            'task' => 'required',
+            'subject' => 'required',
+            'comment' => 'required'
+        ]);
+
+        try {
+            UserProjectActivity::create([
+                'project_id' => $request->id,
+                'task_id' => $request->task,
+                'user_id' => auth()->user()->id,
+                'subject' => $request->subject,
+                'comment' => $request->comment
+            ]);
+        } catch (Throwable $e) {
+            $e->getMessage();
+            return redirect()->back()->with('warning', 'Something went wrong');
+        }
+
+        return redirect()->back()->with('success', 'Success');
     }
 }
