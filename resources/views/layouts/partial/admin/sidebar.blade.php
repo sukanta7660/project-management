@@ -33,27 +33,12 @@
 
           <!---------------Admin Sidebar----------------------->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{ route('admin.tasks.index') }}" class="nav-link">
             <i class="nav-icon fas fa-clipboard-check"></i>
             <p>
               Tasks
-              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Add Task</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>All Tasks</p>
-              </a>
-            </li>
-          </ul>
         </li>
         <li class="nav-item">
               <a href="#" class="nav-link">

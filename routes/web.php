@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,11 +25,11 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
     Route::resource('projects', ProjectController::class);
 
-    Route::controller(ProjectController::class)->group(function () {
+    Route::resource('tasks', TaskController::class)->except(['create', 'store']);
 
+    Route::controller(ProjectController::class)->group(function () {
         Route::post('projects/task-store', 'taskStore')->name('projects.task.store');
         Route::post('projects/discussion-store', 'discussionStore')->name('projects.discussion.store');
-
     });
 
 });
