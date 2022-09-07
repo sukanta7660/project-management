@@ -4,7 +4,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-info">
+                <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Project Update</h3>
                         @if ($errors->any())
