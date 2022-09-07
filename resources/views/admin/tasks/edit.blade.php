@@ -46,7 +46,7 @@
                                                     <input
                                                         type="text"
                                                         id="inputName"
-                                                        value="{{ $task->name }}"
+                                                        value="{{ $task->task }}"
                                                         placeholder="Task Name"
                                                         class="form-control"
                                                         name="name">
@@ -86,7 +86,8 @@
                                                         <option selected="" disabled="">Select one</option>
                                                         @foreach($project->team as $key => $value)
                                                             <option
-                                                                value="{{ $value->id }}">
+                                                                value="{{ $value->id }}"
+                                                                {{ $value->id == $task->staff_id ? 'selected' : '' }}>
                                                                 {{ $value->name }}
                                                             </option>
                                                         @endforeach
@@ -97,7 +98,7 @@
                                         <div class="card-footer">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn btn-secondary btn-sm btn-flat float-right">Save Task</button>
+                                                    <button type="submit" class="btn btn-secondary btn-sm btn-flat float-right">Save Changes</button>
                                                 </div>
                                             </div>
                                         </div>
