@@ -38,7 +38,7 @@
                                         action="{{ route('admin.projects.task.store') }}"
                                         method="post"
                                         enctype="multipart/form-data">
-                                        <input type="hidden" value="{{ $project->id }}" name="id">
+                                        <input type="hidden" value="{{ $project->id }}" name="project_id">
                                         @csrf
                                         <div class="card-body">
                                             <div class="row">
