@@ -37,9 +37,11 @@
                                     href="{{ route('admin.tasks.edit', $row->id) }}">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                <form style="display: contents;"  action="{{ route('admin.tasks.destroy', $row->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @empty

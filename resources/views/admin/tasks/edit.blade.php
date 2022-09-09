@@ -35,10 +35,12 @@
                                         </div>
                                     @endif
                                     <form
-                                        action="{{ route('admin.projects.task.store') }}"
+                                        action="{{ route('admin.tasks.update', $task->id) }}"
                                         method="post"
                                         enctype="multipart/form-data">
                                         @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="project_id" value="{{ $project->id }}">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-12">
@@ -82,7 +84,8 @@
                                                     <label for="inputProjectLeader">Assign To</label>
                                                     <select
                                                         name="staff" id=""
-                                                        class="form-control custom-select" required>
+                                                        class="form-control custom-select"
+                                                        required>
                                                         <option selected="" disabled="">Select one</option>
                                                         @foreach($project->team as $key => $value)
                                                             <option

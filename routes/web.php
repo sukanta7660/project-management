@@ -25,7 +25,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
     Route::resource('projects', ProjectController::class);
 
-    Route::resource('tasks', TaskController::class)->except(['create', 'store']);
+    Route::resource('tasks', TaskController::class)->except(['create', 'store', 'show']);
 
     Route::controller(ProjectController::class)->group(function () {
         Route::post('projects/task-store', 'taskStore')->name('projects.task.store');
