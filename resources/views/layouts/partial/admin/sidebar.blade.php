@@ -22,25 +22,42 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-         <li class="nav-item">
-            <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
+        @if(auth()->user()->role === 'staff')
+          <li class="nav-item">
+              <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-project-diagram"></i>
+                  <p>
+                      Assigned Projects
+                  </p>
+              </a>
           </li>
-
-          <!---------------Admin Sidebar----------------------->
-        <li class="nav-item">
-          <a href="{{ route('admin.tasks.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-clipboard-check"></i>
-            <p>
-              Tasks
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
+          <li class="nav-item">
+              <a href="{{ route('admin.tasks.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-clipboard-check"></i>
+                  <p>
+                      Assigned Tasks
+                  </p>
+              </a>
+          </li>
+        @endif
+        @if(auth()->user()->role === 'admin')
+          <li class="nav-item">
+              <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p>
+                      Dashboard
+                  </p>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a href="{{ route('admin.tasks.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-clipboard-check"></i>
+                  <p>
+                      Tasks
+                  </p>
+              </a>
+          </li>
+          <li class="nav-item">
               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-project-diagram"></i>
                   <p>
@@ -63,7 +80,7 @@
                   </li>
               </ul>
           </li>
-
+        @endif
         <li class="nav-item">
           <a href="{{ route('logout') }}"
           onclick="event.preventDefault();
@@ -77,8 +94,6 @@
           </form>
           </a>
         </li>
-
-
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
