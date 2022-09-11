@@ -34,6 +34,17 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
 });
 
+Route::middleware('auth')
+    ->prefix('staff')
+    ->name('staff.')
+    ->group(function () {
+
+    Route::controller(\App\Http\Controllers\Staff\ProjectController::class)->group(function () {
+        Route::get('assigned-projects', 'assignedProjects')->name('assigned.projects');
+    });
+
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
