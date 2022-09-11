@@ -18,4 +18,9 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'staff_id', 'id');
     }
+
+    public function project() :BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
