@@ -24,7 +24,7 @@
 
         @if(auth()->user()->role === 'staff')
           <li class="nav-item">
-              <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
+              <a href="{{ route('staff.assigned.projects') }}" class="nav-link">
                   <i class="nav-icon fas fa-project-diagram"></i>
                   <p>
                       Assigned Projects
@@ -32,7 +32,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a href="{{ route('admin.tasks.index') }}" class="nav-link">
+              <a href="{{ route('staff.assigned.tasks') }}" class="nav-link">
                   <i class="nav-icon fas fa-clipboard-check"></i>
                   <p>
                       Assigned Tasks

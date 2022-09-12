@@ -42,6 +42,9 @@ Route::middleware('auth')
     Route::controller(\App\Http\Controllers\Staff\ProjectController::class)->group(function () {
         Route::get('assigned-projects', 'assignedProjects')->name('assigned.projects');
     });
+    Route::controller(\App\Http\Controllers\Staff\TaskController::class)->group(function () {
+        Route::get('assigned-tasks', 'assignedTasks')->name('assigned.tasks');
+    });
 
 });
 
