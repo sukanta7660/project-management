@@ -1,16 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Tasks')
+@section('title', 'Assigned Tasks')
 @section('content')
     <section class="content">
-
         <div class="card card-secondary">
             <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
+                <h3 class="card-title">Assigned Tasks</h3>
             </div>
             <div class="card-body p-1 table-responsive text-nowrap">
                 <table class="table table-striped projects" id="myTable">
                     <thead>
-                    <tr>
+                        <tr>
                         <th>#</th>
                         <th>Task</th>
                         <th>Description</th>
@@ -52,8 +51,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
-
     </section>
 @endsection
