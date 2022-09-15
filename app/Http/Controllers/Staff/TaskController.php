@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function assignedTasks() :View
     {
-        $tasks = auth()->user()->projects;
+        $tasks = auth()->user()->tasks;
         return view('staff.tasks.index', compact('tasks'));
     }
 }
