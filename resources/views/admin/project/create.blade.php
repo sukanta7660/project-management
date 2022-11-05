@@ -4,25 +4,28 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-info">
+                <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Project Create</h3>
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                     </div>
-                    <form action="{{ route('admin.projects.store') }}" method="post" enctype="multipart/form-data">
+                    @if ($errors->any())
+                        <div class="alert alert-danger mt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form
+                        action="{{ route('admin.projects.store') }}"
+                        method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputName">Project Name</label>
-                                <input type="text" id="inputName" class="form-control" name="name">
+                                <input type="text" id="inputName" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                             <div class="form-group">
                                 <label for="inputDescription">Project Description</label>

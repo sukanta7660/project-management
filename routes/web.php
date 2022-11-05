@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,13 +17,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('projects', ProjectController::class);
+
+    Route::resource('tasks', TaskController::class)->except(['create', 'store', 'show']);
+
+    Route::controller(ProjectController::class)->group(function () {
+        Route::post('projects/task-store', 'taskStore')->name('projects.task.store');
+        Route::post('projects/discussion-store', 'discussionStore')->name('projects.discussion.store');
+    });
+
+});
+
+Route::middleware('auth')
+    ->prefix('staff')
+    ->name('staff.')
+    ->group(function () {
+
+    Route::controller(\App\Http\Controllers\Staff\ProjectController::class)->group(function () {
+        Route::get('assigned-projects', 'assignedProjects')->name('assigned.projects');
+    });
+    Route::controller(\App\Http\Controllers\Staff\TaskController::class)->group(function () {
+        Route::get('assigned-tasks', 'assignedTasks')->name('assigned.tasks');
+    });
+
 });
 
 Auth::routes();

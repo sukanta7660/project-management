@@ -2,7 +2,16 @@
 @section('title', 'Project Details')
 @section('content')
     <section class="content">
-
+        @if(session()->has('warning'))
+            <div class="alert alert-warning">
+                {{ session()->get('warning') }}
+            </div>
+        @endif
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Project Detail</h3>
@@ -12,15 +21,91 @@
                     <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
                         <div class="row">
                             <div class="col-12">
+                                <div class="card card-secondary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Add Task</h3>
+                                    </div>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger m-2">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <form
+                                        action="{{ route('admin.projects.task.store') }}"
+                                        method="post"
+                                        enctype="multipart/form-data">
+                                        <input type="hidden" value="{{ $project->id }}" name="project_id">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label for="inputName">Task</label>
+                                                    <input
+                                                        type="text"
+                                                        id="inputName"
+                                                        placeholder="Task Name"
+                                                        class="form-control"
+                                                        name="name">
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="inputDescription">Description</label>
+                                                    <textarea
+                                                        placeholder="write here"
+                                                        id="inputDescription"
+                                                        class="form-control"
+                                                        rows="2"
+                                                        name="description"></textarea>
+                                                </div>
+                                                @php
+                                                    $statuses = config('sites.task_statuses');
+                                                @endphp
+                                                <div class="form-group col-6">
+                                                    <label for="inputStatus">Status</label>
+                                                    <select
+                                                        id="inputStatus"
+                                                        class="form-control custom-select"
+                                                        name="status"
+                                                    >
+                                                        <option selected="" disabled="">Select one</option>
+                                                        @foreach($statuses as $item)
+                                                            <option value="{{ $item }}">{{ $item }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <label for="inputProjectLeader">Assign To</label>
+                                                    <select
+                                                        name="staff" id=""
+                                                        class="form-control custom-select" required>
+                                                        <option selected="" disabled="">Select one</option>
+                                                        @foreach($project->team as $key => $value)
+                                                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-secondary btn-sm btn-flat float-right">Save Task</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Tasks</h3>
-                                        <div class="card-tools">
-                                            <a href="#" class="btn btn-sm btn-info">
-                                                <i class="fas fa-plus"></i>
-                                                Add Task
-                                            </a>
-                                        </div>
                                     </div>
                                     <div class="card-body p-1 table-responsive text-nowrap">
                                         <table class="table table-striped projects" id="myTable">
@@ -35,79 +120,39 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            @forelse($project->tasks as $index => $row)
                                             <tr>
-                                                <td>1</td>
-                                                <td>example</td>
-                                                <td>example description</td>
-                                                <td></td>
+                                                <td>{{ $index+1 }}</td>
+                                                <td>{{ $row->task }}</td>
+                                                <td>{{ $row->description }}</td>
+                                                <td>{{ $row->staff->name }}</td>
                                                 <td class="project-state">
-                                                    <span class="badge badge-success">Success</span>
+                                                    <span class="badge badge-secondary">{{ $row->status }}</span>
                                                 </td>
                                                 <td class="project-actions text-right">
+                                                    <a
+                                                        class="btn btn-info btn-sm"
+                                                        href="#">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="#">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
+                                            @empty
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>No Data available</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            @endforelse
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>Recent Activity</h4>
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
-                                        <span class="username">
-<a href="#">Jonathan Burke Jr.</a>
-</span>
-                                        <span class="description">Shared publicly - 7:45 PM today</span>
-                                    </div>
-
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                                    </p>
-                                </div>
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="User Image">
-                                        <span class="username">
-<a href="#">Sarah Ross</a>
-</span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
-                                    </div>
-
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-                                    </p>
-                                </div>
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{ asset('asset') }}/dist/img/avatar.png" alt="user image">
-                                        <span class="username">
- <a href="#">Jonathan Burke Jr.</a>
-</span>
-                                        <span class="description">Shared publicly - 5 days ago</span>
-                                    </div>
-
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +213,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
     </section>

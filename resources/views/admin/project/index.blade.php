@@ -3,11 +3,13 @@
 @section('content')
     <section class="content">
 
-        <div class="card">
+        <div class="card card-secondary">
             <div class="card-header">
                 <h3 class="card-title">Projects</h3>
                 <div class="card-tools">
-                    <a href="{{ route('admin.projects.create') }}" class="btn btn-sm btn-info">
+                    <a
+                        href="{{ route('admin.projects.create') }}"
+                        class="btn btn-sm btn-default btn-flat text-dark">
                         <i class="fas fa-plus"></i>
                         Add Project
                     </a>
