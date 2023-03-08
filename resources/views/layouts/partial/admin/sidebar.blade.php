@@ -87,6 +87,14 @@
                   </li>
               </ul>
           </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.users.index') }}" class="nav-link text-white">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                        Users
+                    </p>
+                </a>
+            </li>
         @endif
         <li class="nav-item text-bold">
           <a href="{{ route('logout') }}"
