@@ -14,7 +14,7 @@
         @endif
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Project Detail</h3>
+                <h3 class="card-title text-white">Project Detail</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -105,7 +105,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Tasks</h3>
+                                        <h3 class="card-title text-white">Tasks</h3>
                                     </div>
                                     <div class="card-body p-1 table-responsive text-nowrap">
                                         <table class="table table-striped projects" id="myTable">

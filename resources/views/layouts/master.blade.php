@@ -17,6 +17,13 @@
             background: #dc354596;
             border-color: #d3253573;
         }
+        .card-header {
+            background: linear-gradient(-120deg, #a98c66, #12191c, #2b3944, #000000);
+        }
+        .user-panel {
+            padding-bottom: 0 !important;
+            padding-top: 7px !important;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" >
